@@ -121,11 +121,26 @@
           return;
         }
         var speechConfig = SpeechSDK.SpeechConfig.fromSubscription(subscriptionKey.value, serviceRegion.value);
-
+        
+        speechConfig.speechSynthesisLanguage = "ko-KR";
+        
         speechConfig.speechSynthesisVoiceName = "ko-KR-SunHiNeural"; 
 
         synthesizer = new SpeechSDK.SpeechSynthesizer(speechConfig);
 
+        const avatarConfig = new SpeechSDK.AvatarConfig(
+        "lisa", // Set avatar character here.
+        "casual-sitting", // Set avatar style here.
+        );
+
+        // Create WebRTC peer connection
+        peerConnection = new RTCPeerConnection({
+            iceServers: [{
+                urls: [ "https://shophelper-avatar-connuication.korea.communication.azure.com" ],
+                username: "Your ICE server username",
+                credential: "Your ICE server credential"
+            }]
+        })        
         let inputText = phraseDiv.value;
         synthesizer.speakTextAsync(
           inputText,
