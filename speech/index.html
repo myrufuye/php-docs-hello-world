@@ -122,6 +122,8 @@
         }
         var speechConfig = SpeechSDK.SpeechConfig.fromSubscription(subscriptionKey.value, serviceRegion.value);
 
+        speechConfig.speechSynthesisVoiceName = "ko-KR-SunHiNeural"; 
+
         synthesizer = new SpeechSDK.SpeechSynthesizer(speechConfig);
 
         let inputText = phraseDiv.value;
